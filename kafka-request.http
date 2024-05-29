@@ -4,4 +4,7 @@ GET http://localhost:8080/api/hello?name=user1
 GET http://localhost:8080/api/simple
 
 
-POST http://localhost:8080/api/message?message=aaaaaaaaaaa
+POST http://localhost:8080/api/message
+Content-Type: application/json
+{"name":"john wick","message":"Hello"}
+

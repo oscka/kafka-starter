@@ -17,10 +17,10 @@ public class KafkaProducerService {
 
     /* Kafka Template 을 이용해 Kafka Broker 전송 */
 
-    private final KafkaTemplate<String,String> kafkaTemplate;
+    private final KafkaTemplate<String,KafkaMessageVO> kafkaTemplate;
 
-    public void sendMessageToKafka(String message) {
-        log.info("Producer Message : {}",message);
-        this.kafkaTemplate.send(topicName,message);
+    public void sendMessageToKafka(KafkaMessageVO kafkaMessageVO) {
+        log.info("Producer Message : name-{},message-{}",kafkaMessageVO.getName(), kafkaMessageVO.getMessage());
+        this.kafkaTemplate.send(topicName,kafkaMessageVO);
     }
 }

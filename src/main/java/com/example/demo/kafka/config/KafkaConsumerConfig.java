@@ -12,6 +12,9 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
+
+import com.example.demo.KafkaMessageVO;
 
 @EnableKafka
 @Configuration
@@ -30,17 +33,17 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.GROUP_ID_CONFIG,env.getProperty("spring.kafka.consumer.group-id"));
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,env.getProperty("spring.kafka.consumer.auto-offset-reset"));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
         return props;
     }
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(this.consumerConfig());
+    public ConsumerFactory<String, KafkaMessageVO> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<String, KafkaMessageVO>(this.consumerConfig(), new StringDeserializer(), new JsonDeserializer<>(KafkaMessageVO.class,false));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String,String> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String,String> factory
+    public ConcurrentKafkaListenerContainerFactory<String,KafkaMessageVO> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String,KafkaMessageVO> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(this.consumerFactory());
         return factory;

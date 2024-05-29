@@ -13,7 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaConsumerService {
 
     @KafkaListener(topics = "test-topic", groupId = "consumer_group01")
-    public void consume(String message) throws IOException {
-        log.info("Consumed Message : {}", message);
+    public void consume(KafkaMessageVO kafkaMessageVO) throws IOException {
+        log.info("Consumed Message : name-{},message-{}",kafkaMessageVO.getName(), kafkaMessageVO.getMessage());
+        //이후 VO안의 데이터를 처리
     }
 }
