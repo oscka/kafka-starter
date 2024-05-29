@@ -16,7 +16,6 @@ public class KafkaProducerService {
     private String topicName;
 
     /* Kafka Template 을 이용해 Kafka Broker 전송 */
-
     private final KafkaTemplate<String,KafkaMessageVO> kafkaTemplate;
 
     public void sendMessageToKafka(KafkaMessageVO kafkaMessageVO) {
