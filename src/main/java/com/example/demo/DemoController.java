@@ -3,19 +3,28 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.kafka.TestProducer;
-
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api") 
+@RequiredArgsConstructor
 @Slf4j
 public class DemoController {
-    private TestProducer testProducer;
+    private final KafkaProducerService kafkaProducerService;
+
+    @PostMapping("/message") 
+    public ResponseEntity<Void> sendMassage(@RequestParam String message) {
+        this.kafkaProducerService.sendMessageToKafka(message);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/hello")
     public String getHello(String name) {
@@ -37,14 +46,6 @@ public class DemoController {
 	@GetMapping("/version")
 	public String version() {
 		log.info("version 1.0");
-		return "=====  version 1.0";
-
-	}
-
-    @GetMapping("/message")
-	public String sendMessage() {
-		log.info("sendMessage");
-        testProducer.create();
 		return "=====  version 1.0";
 
 	}
