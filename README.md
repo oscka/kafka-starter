@@ -3,7 +3,7 @@
 ## 환경구성
 
 - jdk 17, springboot 3.1.5
-- kafka-streams 3.6.0
+- kafka-streams 3.6.0(사용 안함)
 - spring-kafka 3.1.1
 
 ## kafka 설치
