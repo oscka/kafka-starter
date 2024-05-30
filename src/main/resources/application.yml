@@ -8,16 +8,9 @@ spring:
   kafka:
     producer:
       bootstrap-servers: localhost:29092 # Kafka 클러스터에 대한 초기 연결에 사용할 호스트 : 포트 목록
-       ## serializer 방법은 KafkaProducerConfig 로 설정
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
     consumer:
       bootstrap-servers: localhost:29092 # Kafka 클러스에 대한 초기 연결에 사용할 호스트 : 포트 목록
       group-id: consumer_group01 # Group Id
       auto-offset-reset: latest # offset 이 없거나 더 이상 없는 경우 어떻게 처리할지 전략 결정(earliest,latest)
-       ## Deserialze 방법은 KafkaConsumerConfig 로 설정
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 topic:
   name: test-topic
