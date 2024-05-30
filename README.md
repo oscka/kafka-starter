@@ -10,7 +10,13 @@
 
 docker compose 기반으로 간단히 로컬에 설치
 
-참고 - 
+참고 - https://devocean.sk.com/blog/techBoardDetail.do?ID=164007
+
+```zsh
+# docker 와 docker-compose가 설치된 환경에서 아래와 같이 실행
+cd docker/kafka
+docker compose up -d
+```
 
 ## kafka 연동
 
