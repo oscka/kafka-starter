@@ -29,6 +29,14 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,env.getProperty("spring.kafka.producer.bootstrap-servers"));
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        props.put("security.protocol", "SSL");
+        props.put("ssl.truststore.location", env.getProperty("spring.kafka.ssl.trust-store-location"));
+        props.put("ssl.truststore.password", env.getProperty("spring.kafka.ssl.trust-store-password"));
+        props.put("ssl.keystore.password", env.getProperty("spring.kafka.ssl.key-store-password"));
+        props.put("ssl.keystore.location", env.getProperty("spring.kafka.ssl.key-store-location"));
+        props.put("ssl.key.password", env.getProperty("spring.kafka.ssl.key-password"));
+        props.put("ssl.enabled.protocols", "TLSv1.2");
+        props.put("ssl.endpoint.identification.algorithm", "");
         return props;
     }
 

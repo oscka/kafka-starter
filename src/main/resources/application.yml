@@ -1,15 +1,24 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
     name: kafka-starter
 
   kafka:
+
+    security:
+      protocol: "SSL"
+    ssl:
+      trust-store-location: /Users/jstuie/Documents/OSC-2024/mirae/ssh/kafka.broker0.truststore.jks
+      trust-store-password: osc0401!
+      key-store-location: /Users/jstuie/Documents/OSC-2024/mirae/ssh/kafka.broker0.keystore.jks
+      key-store-password: osc0401!
+      key-password: osc0401!
     producer:
-      bootstrap-servers: localhost:29092 # Kafka 클러스터에 대한 초기 연결에 사용할 호스트 : 포트 목록
+      bootstrap-servers: localhost:9093 # Kafka 클러스터에 대한 초기 연결에 사용할 호스트 : 포트 목록
     consumer:
-      bootstrap-servers: localhost:29092 # Kafka 클러스에 대한 초기 연결에 사용할 호스트 : 포트 목록
+      bootstrap-servers: localhost:9093 # Kafka 클러스터에 대한 초기 연결에 사용할 호스트 : 포트 목록
       group-id: consumer_group01 # Group Id
       auto-offset-reset: latest # offset 이 없거나 더 이상 없는 경우 어떻게 처리할지 전략 결정(earliest,latest)
 topic:

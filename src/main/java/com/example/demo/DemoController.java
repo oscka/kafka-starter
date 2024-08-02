@@ -13,17 +13,23 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api") 
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
 public class DemoController {
     private final KafkaProducerService kafkaProducerService;
 
-    @PostMapping("/message") 
+    @PostMapping("/message")
     public String sendMassage(@RequestBody KafkaMessageVO kafkaMessageVO) {
         this.kafkaProducerService.sendMessageToKafka(kafkaMessageVO);
         return "success";
     }
+	@GetMapping("/messageTest")
+	public String sendMassageTest() {
+		KafkaMessageVO kafkaMessageVO = new KafkaMessageVO("name","messageTest");
+		this.kafkaProducerService.sendMessageToKafka(kafkaMessageVO);
+		return "success";
+	}
 
     @GetMapping("/hello")
     public String getHello(String name) {

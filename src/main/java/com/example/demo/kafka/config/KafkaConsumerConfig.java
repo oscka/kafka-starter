@@ -34,6 +34,17 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,env.getProperty("spring.kafka.consumer.auto-offset-reset"));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
+
+
+        props.put("security.protocol", "SSL");
+        props.put("ssl.truststore.location", env.getProperty("spring.kafka.ssl.trust-store-location"));
+        props.put("ssl.truststore.password", env.getProperty("spring.kafka.ssl.trust-store-password"));
+        props.put("ssl.keystore.password", env.getProperty("spring.kafka.ssl.key-store-password"));
+        props.put("ssl.keystore.location", env.getProperty("spring.kafka.ssl.key-store-location"));
+        props.put("ssl.key.password", env.getProperty("spring.kafka.ssl.key-password"));
+        props.put("ssl.enabled.protocols", "TLSv1.2");
+        props.put("ssl.endpoint.identification.algorithm", "");
+
         return props;
     }
     @Bean
